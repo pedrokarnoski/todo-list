@@ -1,0 +1,18 @@
+.task {
+  display: block;
+}
+
+.taskContent {
+  display: flex;
+  align-items: center;
+  background: var(--gray-500);
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: var(--gray-400);
+  padding: 1rem;
+}
+
+.taskContent p {
+  margin-left: 1rem;
+  color: var(--white);
+}
