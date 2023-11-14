@@ -4,7 +4,8 @@
 
 .taskContent {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
   background: var(--gray-500);
   border-radius: 8px;
   border: 1px solid;
@@ -12,7 +13,63 @@
   padding: 1rem;
 }
 
-.taskContent p {
-  margin-left: 1rem;
+.taskContent label {
+  margin: 0 1rem 0 1rem;
   color: var(--white);
+  overflow: hidden;
+  word-wrap: break-word;
+  align-self: flex-start;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: flex-start;
+  min-width: 1.3rem;
+}
+
+.checkboxInput {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  width: 1.3rem;
+  height: 1.3rem;
+  min-width: 1.3rem;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  outline: none;
+  cursor: pointer;
+}
+
+.checkboxInput:checked::before {
+  content: "\2713";
+  font-size: 1rem;
+  color: var(--white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.checkboxInput:checked {
+  background-color: var(--purple-dark);
+  border: 2px solid var(--purple-dark);
+}
+
+.checkboxInput:checked + label {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.task button {
+  background: transparent;
+  border: 0;
+  color: var(--gray-300);
+  cursor: pointer;
+  line-height: 0;
+  border-radius: 2px;
+}
+
+.task button:hover {
+  color: var(--danger);
 }
