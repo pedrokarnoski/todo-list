@@ -1,27 +1,43 @@
-# React + TypeScript + Vite
+# ToDo List - Rocketseat Ignite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de uma ToDo List desenvolvida como parte do curso Ignite da Rocketseat. Desafio complementar do Projeto 01.
 
-Currently, two official plugins are available:
+## Descrição
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A ToDo List é uma aplicação simples para gerenciar suas tarefas diárias. Ela permite que você adicione, marque como concluída e remova tarefas da sua lista.
 
-## Expanding the ESLint configuration
+## Tecnologias utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Vite**: O projeto foi criado utilizando o Vite, um construtor de projetos web que oferece uma configuração rápida e eficiente.
 
-- Configure the top-level `parserOptions` property like this:
+- **HTML, CSS e JavaScript**: As tecnologias básicas para o desenvolvimento web. HTML é usado para estruturação, CSS para estilos e JavaScript para lógica de aplicação.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- **TypeScript**: A linguagem TypeScript foi incorporada para fornecer tipagem estática ao JavaScript, tornando o código mais robusto e fácil de entender.
+
+## Como executar o projeto
+
+1. Clone o repositório para sua máquina local:
+
+```bash
+git clone https://github.com/pedrokarnoski/todo-list.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Navegue até o diretório do projeto:
+
+```bash
+cd todo-list
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4. Inicie o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+Acesse a aplicação no seu navegador usando o seguinte link fornecido no terminal.
