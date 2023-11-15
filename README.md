@@ -1,3 +1,5 @@
+![Imagem do Projeto](/src/assets/todo-logo.svg)
+
 # ToDo List - Rocketseat Ignite
 
 Este é um projeto de uma ToDo List desenvolvida como parte do curso Ignite da Rocketseat. Desafio complementar do Projeto 01.
@@ -40,4 +42,4 @@ npm install
 npm run dev
 ```
 
-Acesse a aplicação no seu navegador usando o seguinte link fornecido no terminal.
+Acesse a aplicação no seu navegador usando o link fornecido no terminal.
