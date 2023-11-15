@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent, InvalidEvent } from "react";
 
 import { PlusCircle } from "phosphor-react";
 
@@ -9,7 +9,7 @@ import { Tasks } from "./Tasks"
 import styles from "./ListTasks.module.css";
 
 export function ListTasks() {
-  const [tasks, setTasks] = useState(["A"]);
+  const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState("");
 
   function handleCreateNewTaks(event: FormEvent) {
@@ -26,6 +26,18 @@ export function ListTasks() {
     setNewTaskText(event.target.value);
   }
 
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("Esse campo é obrigatório!");
+  }
+
+  function deleteTask(taskToDelete: string) {
+    const tasksWithoutDeletedOne = tasks.filter((task) => {
+      return task !== taskToDelete;
+    });
+
+    setTasks(tasksWithoutDeletedOne);
+  }
+
   return (
     <>
       <form onSubmit={handleCreateNewTaks} className={styles.form}>
@@ -34,7 +46,7 @@ export function ListTasks() {
           placeholder="Adicione uma nova tarefa"
           value={newTaskText}
           onChange={handleNewTaskChange}
-          // onInvalid={handleNewTaskInvalid}
+          onInvalid={handleNewTaskInvalid}
           required
         />
         <footer>
@@ -45,7 +57,7 @@ export function ListTasks() {
         </footer>
       </form>
       <header className={styles.header}>
-        <p>Tarefas criadas<span>0</span></p>
+        <p>Tarefas criadas<span>{tasks.length}</span></p>
         <p>Concluídas<span>0</span></p>
       </header>
 
@@ -58,6 +70,8 @@ export function ListTasks() {
               return (
                 <Tasks
                   key={task}
+                  content={task}
+                  onDeleteTask={deleteTask}
                 />
               )
             })}
