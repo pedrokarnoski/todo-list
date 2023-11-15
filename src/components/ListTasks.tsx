@@ -9,7 +9,7 @@ import { Tasks } from "./Tasks"
 import styles from "./ListTasks.module.css";
 
 export function ListTasks() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<{ content: string; completed: boolean }[]>([]);
   const [newTaskText, setNewTaskText] = useState("");
   const [completedTasks, setCompletedTasks] = useState(0);
 

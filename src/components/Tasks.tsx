@@ -3,7 +3,7 @@ import { Trash } from "phosphor-react";
 import styles from "./Tasks.module.css";
 
 interface TasksProps {
-  content: string;
+  content: { content: string; completed: boolean };
   onDeleteTask: (task: string, completed: boolean) => void;
   onToggleComplete: (task: string, completed: boolean) => void;
 }
@@ -12,7 +12,7 @@ export function Tasks({ content, onDeleteTask, onToggleComplete }: TasksProps) {
   const { content: taskContent, completed } = content;
 
   function handleDeleteTask() {
-    onDeleteTask(content.content, completed);
+    onDeleteTask(taskContent, completed);
   }
 
   function handleCheckboxChange() {
