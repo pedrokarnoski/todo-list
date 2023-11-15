@@ -1,23 +1,22 @@
-import { useState } from "react";
-
 import { Trash } from "phosphor-react";
 
 import styles from "./Tasks.module.css";
 
 interface TasksProps {
   content: string;
-  onDeleteTask: (task: string) => void;
+  onDeleteTask: (task: string, completed: boolean) => void;
+  onToggleComplete: (task: string, completed: boolean) => void;
 }
 
-export function Tasks({ content, onDeleteTask }: TasksProps) {
-  const [completed, setCompleted] = useState(false);
+export function Tasks({ content, onDeleteTask, onToggleComplete }: TasksProps) {
+  const { content: taskContent, completed } = content;
 
   function handleDeleteTask() {
-    onDeleteTask(content);
+    onDeleteTask(content.content, completed);
   }
 
   function handleCheckboxChange() {
-    setCompleted(!completed);
+    onToggleComplete(taskContent, !completed);
   }
 
   return (
@@ -27,12 +26,12 @@ export function Tasks({ content, onDeleteTask }: TasksProps) {
           <input
             type="checkbox"
             className={styles.checkboxInput}
-            id={`checkbox-${content}`}
+            id={`checkbox-${taskContent}`}
             checked={completed}
             onChange={handleCheckboxChange}
           />
-          <label htmlFor={`checkbox-${content}`}>
-            {content}
+          <label htmlFor={`checkbox-${taskContent}`}>
+            {taskContent}
           </label>
         </div>
         <button onClick={handleDeleteTask} title="Deletar tarefa">
@@ -40,5 +39,5 @@ export function Tasks({ content, onDeleteTask }: TasksProps) {
         </button>
       </div>
     </div>
-  )
+  );
 }

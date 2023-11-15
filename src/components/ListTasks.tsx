@@ -11,11 +11,12 @@ import styles from "./ListTasks.module.css";
 export function ListTasks() {
   const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState("");
+  const [completedTasks, setCompletedTasks] = useState(0);
 
-  function handleCreateNewTaks(event: FormEvent) {
+  function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
 
-    setTasks([...tasks, newTaskText]);
+    setTasks([...tasks, { content: newTaskText, completed: false }]);
 
     setNewTaskText("");
   }
@@ -30,17 +31,28 @@ export function ListTasks() {
     event.target.setCustomValidity("Esse campo é obrigatório!");
   }
 
-  function deleteTask(taskToDelete: string) {
-    const tasksWithoutDeletedOne = tasks.filter((task) => {
-      return task !== taskToDelete;
-    });
+  function deleteTask(taskToDelete: string, completed: boolean) {
+    const tasksWithoutDeletedOne = tasks.filter((task) => task.content !== taskToDelete);
 
     setTasks(tasksWithoutDeletedOne);
+
+    if (completed) {
+      setCompletedTasks((prevCompletedTasks) => prevCompletedTasks - 1);
+    }
+  }
+
+  function toggleComplete(taskContent: string, completed: boolean) {
+    const updatedTasks = tasks.map((task) =>
+      task.content === taskContent ? { ...task, completed } : task
+    );
+
+    setTasks(updatedTasks);
+    setCompletedTasks(updatedTasks.filter((task) => task.completed).length);
   }
 
   return (
     <>
-      <form onSubmit={handleCreateNewTaks} className={styles.form}>
+      <form onSubmit={handleCreateNewTask} className={styles.form}>
         <textarea
           name="newTask"
           placeholder="Adicione uma nova tarefa"
@@ -58,7 +70,7 @@ export function ListTasks() {
       </form>
       <header className={styles.header}>
         <p>Tarefas criadas<span>{tasks.length}</span></p>
-        <p>Concluídas<span>0</span></p>
+        <p>Concluídas<span>{completedTasks} {tasks.length ? 'de ' + tasks.length : null}</span></p>
       </header>
 
       {!tasks.length ? <div className={styles.separator} /> : null}
@@ -66,12 +78,13 @@ export function ListTasks() {
       <div className={styles.tasks}>
         {tasks.length ? (
           <>
-            {tasks.map((task) => {
+            {tasks.map((task, index) => {
               return (
                 <Tasks
-                  key={task}
+                  key={`${task.content}-${index}`}
                   content={task}
                   onDeleteTask={deleteTask}
+                  onToggleComplete={toggleComplete}
                 />
               )
             })}
